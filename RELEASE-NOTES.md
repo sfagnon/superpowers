@@ -1,5 +1,15 @@
 # Superpowers Release Notes
 
+## v4.3.2 (2026-02-26)
+
+### Fixed
+
+**SessionStart hook now runs asynchronously to prevent subagent freeze**
+
+Changed `async: false` back to `async: true` in hooks.json. When the hook ran synchronously, the subagent's session startup blocked until the hook completed. This caused subagents dispatched via the Task tool to appear frozen (the parent agent waited indefinitely while the subagent session was held at the SessionStart barrier). Running the hook async allows subagent sessions to start immediately while context injection still completes in practice before the model's first response.
+
+---
+
 ## v4.3.1 (2026-02-21)
 
 ### Added
